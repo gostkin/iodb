@@ -8,7 +8,10 @@ version := "0.3.2"
 
 scalaVersion := "2.12.3"
 
+val scorexVersion = "6ffeafc8-SNAPSHOT"
+
 libraryDependencies ++= Seq(
+  "org.scorexfoundation" %% "scrypto" % "2.1.6",
   "com.google.guava" % "guava" % "19.0",
   "net.jpountz.lz4" % "lz4" % "1.3.0",
   "org.slf4j" % "slf4j-api" % "1.+",
@@ -18,7 +21,7 @@ libraryDependencies ++= Seq(
   "com.novocode" % "junit-interface" % "0.11" % "test",
   "org.rocksdb" % "rocksdbjni" % "4.5.1" % "test",
   "org.iq80.leveldb" % "leveldb" % "0.9" % "test",
-  "ch.qos.logback" % "logback-classic" % "1.+" % "test"
+  "ch.qos.logback" % "logback-classic" % "1.+" % "test",
 )
 
 licenses := Seq("CC0" -> url("https://creativecommons.org/publicdomain/zero/1.0/legalcode"))

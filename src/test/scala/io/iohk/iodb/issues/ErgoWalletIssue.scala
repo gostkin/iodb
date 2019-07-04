@@ -5,18 +5,20 @@ import java.io.File
 import io.iohk.iodb.LSMStore
 import io.iohk.iodb.ByteArrayWrapper
 import io.iohk.iodb.TestUtils.{fromLong, randomA}
+import scorex.crypto.hash.Blake2b256
 
 object ErgoWalletIssue {
-  val insertionsCount = 10000
+  val insertionsCount = 100000
   val keySize = 32
 
   def main(args: Array[String]): Unit = {
-    val storeDir = new File("tempdir2")
+    val storeDir = new File("tempdir5")
+    storeDir.mkdirs();
     val s = new LSMStore(storeDir)
     var lastKey: ByteArrayWrapper = null //= new ByteArrayWrapper(BigInt("14956095050651051591550659499651382088520152618993681999797590944563519175328").toByteArray)
     for (i <- 0 to insertionsCount) {
-      val key = randomA(keySize)
-      val value = randomA(keySize * 256)
+      val key = ByteArrayWrapper(Blake2b256.hash(i.toString))
+      val value = randomA(keySize)
       s.update(
         i,
         Seq.empty,
@@ -25,7 +27,7 @@ object ErgoWalletIssue {
         lastKey = key
       }
       if (i % 10000 == 0) {
-        println(key)
+        println(i)
       }
     }
 
